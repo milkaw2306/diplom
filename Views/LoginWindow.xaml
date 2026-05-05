@@ -3,13 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:viewModels="clr-namespace:Diplom_zxc.ViewModels"
         Title="Diplom_zxc - Вход" 
-        Height="400" Width="450"
+        Height="450" Width="400"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
 
     <Window.DataContext>
         <viewModels:LoginViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
 
     <Grid Background="{DynamicResource MaterialDesignPaper}">
         <Border Background="{DynamicResource MaterialDesignCardBackground}" 
@@ -30,13 +34,11 @@
                           HorizontalAlignment="Center" Margin="0,0,0,30"
                           Foreground="{DynamicResource MaterialDesignBody}"/>
 
-                <TextBlock Text="Имя пользователя" Margin="0,0,0,5"
-                          Foreground="{DynamicResource MaterialDesignBody}"/>
+                <TextBlock Text="Имя пользователя" Margin="0,0,0,5"/>
                 <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                          Height="35" FontSize="14" Margin="0,0,0,15"/>
 
-                <TextBlock Text="Пароль" Margin="0,0,0,5"
-                          Foreground="{DynamicResource MaterialDesignBody}"/>
+                <TextBlock Text="Пароль" Margin="0,0,0,5"/>
                 <PasswordBox x:Name="PasswordBox"
                             Height="35" FontSize="14" Margin="0,0,0,5"/>
 
@@ -48,7 +50,6 @@
                 <Button Content="Войти" 
                        Command="{Binding LoginCommand}"
                        Height="40" FontSize="14"
-                       IsEnabled="{Binding IsLoggingIn, Converter={x:Static local:InverseBoolConverter.Instance}}"
                        Background="{DynamicResource PrimaryHueMidBrush}"
                        Foreground="White"
                        BorderThickness="0"

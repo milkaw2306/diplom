@@ -1,23 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net10.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<UseWindowsForms>false</UseWindowsForms>
-		<RootNamespace>Diplom_zxc</RootNamespace>
-		<AssemblyName>Diplom_zxc</AssemblyName>
-		<Version>1.0.0</Version>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Diplom_zxc</RootNamespace>
+    <AssemblyName>Diplom_zxc</AssemblyName>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="MaterialDesignThemes" Version="5.2.0" />
-		<PackageReference Include="MySql.Data" Version="9.2.0" />
-		<PackageReference Include="Dapper" Version="2.1.35" />
-		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-		<PackageReference Include="MailKit" Version="4.11.0" />
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.7" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.2.0" />
+    <PackageReference Include="MySql.Data" Version="9.2.0" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MailKit" Version="4.9.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+  </ItemGroup>
 </Project>
