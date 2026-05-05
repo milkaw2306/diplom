@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Diplom_zxc.Models
+﻿namespace Diplom_zxc.Models
 {
-    class ShareLink
+    public class ShareLink
     {
+        public int ShareId { get; set; }
+        public int? FolderId { get; set; }
+        public int? PhotoId { get; set; }
+        public string? ShareCode { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime? ExpiryDate { get; set; }
+        public bool IsActive { get; set; } = true;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

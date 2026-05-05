@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Diplom_zxc.Services;
 
 namespace Diplom_zxc
 {
@@ -9,28 +10,23 @@ namespace Diplom_zxc
         public static string ConnectionString { get; } =
             "server=localhost;port=3306;database=diplom_zxc;uid=root;password=your_password;";
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // Инициализация базы данных
-            InitializeDatabase();
-        }
-
-        private async void InitializeDatabase()
-        {
             try
             {
-                var dbService = new Services.DatabaseService(ConnectionString);
+                var dbService = new DatabaseService(ConnectionString);
                 await dbService.InitializeDatabaseAsync();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка подключения к базе данных: {ex.Message}\n\n" +
-                              "Проверьте, запущен ли MySQL сервер и правильно ли указаны настройки подключения.",
-                              "Ошибка базы данных", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                Current.Shutdown();
+                System.Windows.MessageBox.Show(
+                    $"Ошибка подключения к базе данных: {ex.Message}\n\n" +
+                    "Проверьте, запущен ли MySQL сервер и правильно ли указаны настройки подключения.",
+                    "Ошибка базы данных",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
     }
