@@ -1,26 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Diplom_zxc.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginWindow.xaml
-    /// </summary>
-    public partial class LoginWindow : Page
+    public partial class LoginWindow : Window
     {
         public LoginWindow()
         {
             InitializeComponent();
+
+            PasswordBox.PasswordChanged += (s, e) =>
+            {
+                if (DataContext is ViewModels.LoginViewModel viewModel)
+                {
+                    viewModel.Password = PasswordBox.Password;
+                }
+            };
+        }
+    }
+
+    public static class InverseBoolConverter
+    {
+        public static readonly IValueConverter Instance = new InvertBoolConverter();
+
+        private class InvertBoolConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return value is bool b && !b;
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return value is bool b && !b;
+            }
         }
     }
 }

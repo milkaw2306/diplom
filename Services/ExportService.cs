@@ -51,4 +51,9 @@ namespace Diplom_zxc.Services
             await connection.OpenAsync();
 
             var photoIds = await connection.QueryAsync<int>(
-                "SELECT PhotoId FROM Photos WHERE
+                "SELECT PhotoId FROM Photos WHERE FolderId = @FolderId", new { FolderId = folderId });
+
+            return await ExportPhotos(photoIds.ToList(), exportPath);
+        }
+    }
+}

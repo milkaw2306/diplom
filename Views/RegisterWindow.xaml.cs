@@ -1,25 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace Diplom_zxc.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для RegisterWindow.xaml
-    /// </summary>
     public partial class RegisterWindow : Window
     {
         public RegisterWindow()
         {
             InitializeComponent();
+
+            PasswordBox.PasswordChanged += (s, e) =>
+            {
+                if (DataContext is ViewModels.RegisterViewModel viewModel)
+                {
+                    viewModel.Password = PasswordBox.Password;
+                }
+            };
+
+            ConfirmPasswordBox.PasswordChanged += (s, e) =>
+            {
+                if (DataContext is ViewModels.RegisterViewModel viewModel)
+                {
+                    viewModel.ConfirmPassword = ConfirmPasswordBox.Password;
+                }
+            };
         }
     }
 }

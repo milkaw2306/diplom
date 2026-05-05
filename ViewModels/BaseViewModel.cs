@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Diplom_zxc.ViewModels
 {
-    class BaseViewModel
+    public partial class BaseViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private bool _isBusy;
+
+        [ObservableProperty]
+        private string _title = string.Empty;
+
+        [ObservableProperty]
+        private string _errorMessage = string.Empty;
+
+        [ObservableProperty]
+        private bool _hasError;
     }
 }
