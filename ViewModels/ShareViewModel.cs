@@ -1,10 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Media;
 
-namespace Diplom_zxc.ViewModels
+namespace Diplom_zxc.Converters
 {
-    class ShareViewModel
+    /// <summary>
+    /// Инвертирует булево значение
+    /// </summary>
+    public class InverseBoolConverter : IValueConverter
     {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool boolValue)
+                return !boolValue;
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool boolValue)
+                return !boolValue;
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Конвертирует булево значение в цвет (красный/зеленый)
+    /// </summary>
+    public class ErrorColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool hasError && hasError)
+                return new SolidColorBrush(Colors.Red);
+            return new SolidColorBrush(Colors.Green);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

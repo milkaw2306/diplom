@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Diplom_zxc.ViewModels;
 
 namespace Diplom_zxc.Views
 {
@@ -17,9 +10,25 @@ namespace Diplom_zxc.Views
     /// </summary>
     public partial class ExportWindow : Window
     {
+        private readonly ExportViewModel? _viewModel;
+
         public ExportWindow()
         {
             InitializeComponent();
+            _viewModel = DataContext as ExportViewModel;
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel != null && !string.IsNullOrEmpty(_viewModel.ExportPath))
+            {
+                _viewModel.ExportCommand.Execute(null);
+            }
         }
     }
 }

@@ -1,26 +1,35 @@
 ﻿using System.Windows;
+using Diplom_zxc.ViewModels;
 
 namespace Diplom_zxc.Views
 {
+    /// <summary>
+    /// Логика взаимодействия для RegisterWindow.xaml
+    /// </summary>
     public partial class RegisterWindow : Window
     {
+        private readonly RegisterViewModel? _viewModel;
+
         public RegisterWindow()
         {
             InitializeComponent();
+            _viewModel = DataContext as RegisterViewModel;
 
+            // Привязываем PasswordBox к ViewModel
             PasswordBox.PasswordChanged += (s, e) =>
             {
-                if (DataContext is ViewModels.RegisterViewModel viewModel)
+                if (_viewModel != null)
                 {
-                    viewModel.Password = PasswordBox.Password;
+                    _viewModel.Password = PasswordBox.Password;
                 }
             };
 
+            // Привязываем ConfirmPasswordBox к ViewModel
             ConfirmPasswordBox.PasswordChanged += (s, e) =>
             {
-                if (DataContext is ViewModels.RegisterViewModel viewModel)
+                if (_viewModel != null)
                 {
-                    viewModel.ConfirmPassword = ConfirmPasswordBox.Password;
+                    _viewModel.ConfirmPassword = ConfirmPasswordBox.Password;
                 }
             };
         }

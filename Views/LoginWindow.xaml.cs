@@ -1,40 +1,29 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using Diplom_zxc.ViewModels;
 
 namespace Diplom_zxc.Views
 {
+    /// <summary>
+    /// Логика взаимодействия для LoginWindow.xaml
+    /// </summary>
     public partial class LoginWindow : Window
     {
+        private readonly LoginViewModel? _viewModel;
+
         public LoginWindow()
         {
             InitializeComponent();
+            _viewModel = DataContext as LoginViewModel;
 
+            // Привязываем PasswordBox к ViewModel
             PasswordBox.PasswordChanged += (s, e) =>
             {
-                if (DataContext is ViewModels.LoginViewModel viewModel)
+                if (_viewModel != null)
                 {
-                    viewModel.Password = PasswordBox.Password;
+                    _viewModel.Password = PasswordBox.Password;
                 }
             };
-        }
-    }
-
-    public static class InverseBoolConverter
-    {
-        public static readonly IValueConverter Instance = new InvertBoolConverter();
-
-        private class InvertBoolConverter : IValueConverter
-        {
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                return value is bool b && !b;
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                return value is bool b && !b;
-            }
         }
     }
 }

@@ -1,18 +1,26 @@
 ﻿using System.Windows;
+using Diplom_zxc.ViewModels;
 
 namespace Diplom_zxc.Views
 {
+    /// <summary>
+    /// Логика взаимодействия для ForgotPasswordWindow.xaml
+    /// </summary>
     public partial class ForgotPasswordWindow : Window
     {
+        private readonly ForgotPasswordViewModel? _viewModel;
+
         public ForgotPasswordWindow()
         {
             InitializeComponent();
+            _viewModel = DataContext as ForgotPasswordViewModel;
 
+            // Привязываем PasswordBox к ViewModel
             NewPasswordBox.PasswordChanged += (s, e) =>
             {
-                if (DataContext is ViewModels.ForgotPasswordViewModel viewModel)
+                if (_viewModel != null)
                 {
-                    viewModel.NewPassword = NewPasswordBox.Password;
+                    _viewModel.NewPassword = NewPasswordBox.Password;
                 }
             };
         }
