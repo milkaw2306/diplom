@@ -70,7 +70,7 @@ namespace Diplom_zxc.ViewModels
         [RelayCommand]
         private void GoToLogin()
         {
-            var loginWindow = new Views.LoginWindow();
+            var loginWindow = new LoginWindow();
             loginWindow.Show();
             CloseCurrentWindow();
         }

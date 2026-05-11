@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 using Dapper;
 using Diplom_zxc.Models;
 
@@ -69,13 +71,7 @@ namespace Diplom_zxc.Services
                 "UPDATE Users SET ResetCode = @ResetCode, ResetCodeExpiry = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE UserId = @UserId",
                 new { ResetCode = resetCode, UserId = user.UserId });
 
-            string subject = "Сброс пароля в приложении Diplom_zxc";
-            string body = $@"
-                <h2>Восстановление пароля</h2>
-                <p>Ваш код для сброса пароля: <strong>{resetCode}</strong></p>
-                <p>Код действителен в течение 15 минут.</p>";
-
-            await _emailService.SendEmailAsync(email, subject, body);
+            await _emailService.SendEmailAsync(email, "Сброс пароля", $"Код: {resetCode}");
         }
 
         public async Task<bool> ResetPasswordAsync(string email, string code, string newPassword)

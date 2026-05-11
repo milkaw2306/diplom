@@ -85,7 +85,7 @@ namespace Diplom_zxc.ViewModels
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window is Views.LoginWindow)
+                if (window is LoginWindow)
                 {
                     window.Close();
                     break;

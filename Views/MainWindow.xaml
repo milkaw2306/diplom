@@ -1,12 +1,81 @@
-﻿<Window x:Class="Diplom_zxc.MainWindow"
+﻿<Window x:Class="Diplom_zxc.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Diplom_zxc"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        xmlns:viewModels="clr-namespace:Diplom_zxc.ViewModels"
+        Title="Diplom_zxc - Фото Диск" 
+        Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized">
 
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхнее меню -->
+        <Border Grid.Row="0" Background="{DynamicResource MaterialDesignPaper}"
+                BorderBrush="{DynamicResource MaterialDesignDivider}" 
+                BorderThickness="0,0,0,1" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Diplom_zxc" FontSize="20" FontWeight="Bold" 
+                         VerticalAlignment="Center" Margin="10,0"
+                         Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                <Button Content="Создать папку" Command="{Binding CreateFolderCommand}"
+                        Height="35" Margin="5"/>
+                <Button Content="Импорт" Command="{Binding OpenImportWindow}"
+                        Height="35" Margin="5"/>
+                <Button Content="Экспорт" Command="{Binding OpenExportWindow}"
+                        Height="35" Margin="5"/>
+                <Button Content="Выход" Click="Exit_Click" Height="35" Margin="5"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Основной контент -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Папки -->
+            <ListBox Grid.Column="0" ItemsSource="{Binding Folders}" 
+                     SelectedItem="{Binding SelectedFolder}"
+                     DisplayMemberPath="FolderName" Margin="10"/>
+
+            <!-- Фотографии -->
+            <ScrollViewer Grid.Column="1">
+                <ItemsControl ItemsSource="{Binding Photos}" Margin="10">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="200" Height="200" Margin="5"
+                                    Background="White" CornerRadius="8">
+                                <Image Source="{Binding Thumbnail}" Stretch="UniformToFill"/>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+        <!-- Статус бар -->
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock Text="{Binding UserName, StringFormat='Пользователь: {0}'}"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ProgressBar Value="{Binding StoragePercent}" Width="150" Height="15"/>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
